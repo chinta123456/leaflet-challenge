@@ -62,26 +62,27 @@ function createFeatures(earthquakeData) {
 }
 
 function createMap(earthquakes) {
-
+    //REFERENCE DOC
+//https://leafletjs.com/examples/quick-start/
   // Define outdoormap, satellitemap, and grayscalemap layers
-  var outdoorsmap = L.tileLayer("https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}", {
+  var outdoorsmap = L.tileLayer("https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}", {
     attribution: "Map data &copy; <a href=\"https://www.openstreetmap.org/\">OpenStreetMap</a> contributors, <a href=\"https://creativecommons.org/licenses/by-sa/2.0/\">CC-BY-SA</a>, Imagery © <a href=\"https://www.mapbox.com/\">Mapbox</a>",
     maxZoom: 18,
-    id: "mapbox.outdoors",
+    id: "mapbox/outdoors-v11",
     accessToken: API_KEY
   });
 
-  var satellitemap = L.tileLayer("https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}", {
+  var satellitemap = L.tileLayer("https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}", {
     attribution: "Map data &copy; <a href=\"https://www.openstreetmap.org/\">OpenStreetMap</a> contributors, <a href=\"https://creativecommons.org/licenses/by-sa/2.0/\">CC-BY-SA</a>, Imagery © <a href=\"https://www.mapbox.com/\">Mapbox</a>",
     maxZoom: 18,
-    id: "mapbox.satellite",
+    id: "mapbox/satellite-v9",
     accessToken: API_KEY
   });
 
-  var grayscalemap = L.tileLayer("https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}", {
+  var grayscalemap = L.tileLayer("https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}", {
     attribution: "Map data &copy; <a href=\"https://www.openstreetmap.org/\">OpenStreetMap</a> contributors, <a href=\"https://creativecommons.org/licenses/by-sa/2.0/\">CC-BY-SA</a>, Imagery © <a href=\"https://www.mapbox.com/\">Mapbox</a>",
     maxZoom: 18,
-    id: "mapbox.light",
+    id: "mapbox/light-v10",
     accessToken: API_KEY
   });
 
@@ -104,9 +105,10 @@ function createMap(earthquakes) {
   // Create our map, giving it the streetmap and earthquakes layers to display on load
   var myMap = L.map("map", {
     center: [
-      37.09, -95.71
+      //37.09, -95.71
+      10,0
     ],
-    zoom: 4,
+    zoom: 2,
     layers: [outdoorsmap, earthquakes, faultLine]
   });
 
@@ -124,7 +126,7 @@ function createMap(earthquakes) {
   d3.json(faultlinequery, function(data) {
     L.geoJSON(data, {
       style: function() {
-        return {color: "orange", fillOpacity: 0}
+        return {color: "rgb(112,146,190)",fillOpacity: 00}
       }
     }).addTo(faultLine)
   })
